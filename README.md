@@ -37,7 +37,12 @@ Viewing the logs
 
 A volume devoted to the logs is included in the image. Its path is `/var/log/nsd` and the default log file is `nsd.log`. For example, to view this file,
 
-    docker run --name empty-nsd-logs --volumes-from empty-nsd debian:wheezy cat /var/log/nsd/nsd.log
+    docker run --volumes-from empty-nsd debian:wheezy cat /var/log/nsd/nsd.log
+
+Adding configuration and zone files
+-----------------------------------
+
+TODO
 
 Exposing the port
 -----------------
