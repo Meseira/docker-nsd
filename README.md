@@ -28,12 +28,16 @@ To interrogate this local empty name server, simply use `dig`:
 
     dig @`docker inspect --format "{{ .NetworkSettings.IPAddress }}" empty-nsd`
 
-This command should return an empty *QUESTION SECTION* and some details about the request. If you receive no response from the NSD server and an error message "*connection timed out; no servers could be reached*", this may be due to an input blockage from your firewall. In such a case, check the rules related to the `docker0` interface.
+This command should return an empty *QUESTION SECTION* and some details about the request.
+
+If you receive no response from the NSD server and an error message "*connection timed out; no servers could be reached*", this may be due to an input blockage from your firewall. In such a case, check the rules related to the `docker0` interface or ignore this test.
 
 Viewing the logs
 ----------------
 
-TODO
+A volume devoted to the logs is included in the image. Its path is `/var/log/nsd` and the default log file is `nsd.log`. For example, to view this file,
+
+    docker run --name empty-nsd-logs --volumes-from empty-nsd debian:wheezy cat /var/log/nsd/nsd.log
 
 Exposing the port
 -----------------
