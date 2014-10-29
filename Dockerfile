@@ -4,17 +4,16 @@ MAINTAINER Xavier Gendre "gendre.reivax@gmail.com"
 
 RUN apt-get update && apt-get install -y nsd3
 
-# Empty configuration file
-RUN touch /etc/nsd3/nsd.conf
-
-# Build the empty database
-RUN zonec -c /etc/nsd3/nsd.conf
+# Prepare and build the empty database
+# /etc/nsd3/nsd.conf : configuration file for NSD
+# /var/run/nsd3 : allow to create a pidfile for NSD
+RUN rm -f /etc/nsd3/nsd.conf && \
+    touch /etc/nsd3/nsd.conf && \
+    mkdir -p /var/run/nsd3 && \
+    zonec -c /etc/nsd3/nsd.conf
 
 # Volume for the logs
 VOLUME ["/var/log/nsd"]
-
-# Allowed to create a pidfile
-RUN mkdir -p /var/run/nsd3
 
 EXPOSE 53/udp
 
