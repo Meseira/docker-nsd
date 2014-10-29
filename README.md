@@ -42,7 +42,7 @@ A volume devoted to the logs is included in the image. Its path is `/var/log/nsd
 Adding configuration and zone files
 -----------------------------------
 
-The container `empty-nsd` simply run a basic NSD server with no zone. Now we want to have fun with our own configuration and zone files.
+The container `empty-nsd` simply runs a basic NSD server with no zone. Now we want to have fun with our own configuration and zone files.
 
 The default configuration file is `nsd.conf` and is located in `/etc/nsd3/`. To write it, help can be found with `man 5 nsd.conf` and in the sample configuration file,
 
