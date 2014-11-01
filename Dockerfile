@@ -12,10 +12,12 @@ RUN rm -f /etc/nsd3/nsd.conf && \
     mkdir -p /var/run/nsd3 && \
     zonec -c /etc/nsd3/nsd.conf
 
-# Volume for the logs
-VOLUME ["/var/log/nsd"]
+# Volumes
+# /etc/nsd3 : configuration and zone files
+# /var/log/nsd : log files
+VOLUME ["/etc/nsd3", "/var/log/nsd"]
 
 EXPOSE 53/udp
 
-ENTRYPOINT ["/usr/sbin/nsd", "-d"]
-CMD ["-c", "/etc/nsd3/nsd.conf", "-l", "/var/log/nsd/nsd.log"]
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
