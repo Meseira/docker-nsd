@@ -54,7 +54,7 @@ Adding configuration and zone files
 
 For the moment, the container `nsd-server` is empty and does not serve to anything. Now we want to have fun with our own configuration and zone files.
 
-The default configuration file is `nsd.conf` and is located in `/etc/nsd3/`. Help about this file can be found with `man 5 nsd.conf` and in the sample configuration file,
+The default configuration file is `nsd.conf` and is located in `/etc/nsd3`. Help about this file can be found with `man 5 nsd.conf` and in the sample configuration file,
 
     root@nsd-data:/# cat /etc/nsd3/nsd.conf.sample
 
@@ -70,7 +70,7 @@ Let us take a basic example to test our server,
       zonefile: test.nsd.zone
     EOF
 
-The zone files can also be located in `/etc/nsd3/`. The format of a zone file is defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1). For more details, see
+The zone files can also be located in `/etc/nsd3`. The format of a zone file is defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1). For more details, see
 
 [wikipedia.org/wiki/Zone_file][5]
 
