@@ -118,6 +118,28 @@ To use the container as a name server listening on the standard domain port of t
 
     docker run -p 53:53/udp -d --name nsd-server nsd-server
 
+Advanced configuration
+----------------------
+
+Dealing with the configuration, log and zone files through the volumes given by the NSD server can be annoying. A better approach to handle these files is to proceed in the other way: create a container for the mutable data and share the volumes with the container of the NSD server. For this, we propose to use a host directory for the configuration and zones files, `/nsd-conf` in the sequel, and a simple volume for the logs. Thus, we create the container `nsd-data` with
+
+    docker run -it --name nsd-data --hostname nsd-data \
+           -v /nsd-conf:/etc/nsd3 \
+           -v /var/log/nsd \
+           debian:wheezy /bin/bash
+
+The host directory `/nsd-conf` contains your configuration and zone files and is mounted as a data volume on `/etc/nsd3`. Moreover, a classical volume is mounted on `/var/log/nsd` for the logs.
+
+It is now simple to use this two volumes to create the container for the NSD server,
+
+    docker run -d -p 53:53/udp --name nsd-server \
+           --volumes-from nsd-data \
+           meseira/nsd
+
+As above, if you modify a file in `/nsd-conf` (or in the directory `/etc/nsd3` of the container `/nsd-data`), it is sufficient to `restart` the container `nsd-server` for taking it into account,
+
+    docker restart nsd-server
+
 Issues
 ======
 
